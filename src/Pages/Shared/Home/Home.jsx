@@ -8,6 +8,10 @@ import Contact from "../Contact/Contact";
 import HomeContentLoad from "../Navbar/HomeContentLoad/HomeContentLoad";
 import HomeCategoryLoad from "../HomeCategoryLoad/HomeCategoryLoad";
 import Search from "../../Search/Search";
+import Timeline from "../Timeline/Timeline";
+import HeroSecond from "../HeroSecond/HeroSecond";
+import Faq from "../../Faq/Faq";
+import AddProductUsingReactState from "../../AddProductUsingReactState";
 
 export default function Home() {
 
@@ -19,18 +23,33 @@ export default function Home() {
       <div>
         <Banner></Banner>
       </div>
+      <div>
+        {/* <AddProductUsingReactState></AddProductUsingReactState> */}
+      </div>
       {/* <Search></Search> */}
       <div>
         <HowItWorks></HowItWorks>
       </div>
 
       <div className="p-10"> <HomeCategoryLoad></HomeCategoryLoad></div>
+      <div className="p-20">
+        <HeroSecond></HeroSecond>
+      </div>
 
       <HomeContentLoad></HomeContentLoad>
       {/* load all course */}
 
+      <div className="p-20">
+        <span className="text-5xl flex justify-center">Offer Time</span>
+        <div className="p-10"><Timeline></Timeline></div>
+      </div>
+
+
       <div>
         <Contact></Contact>
+      </div>
+      <div className="p-20">
+        <Faq></Faq>
       </div>
     </div>
 

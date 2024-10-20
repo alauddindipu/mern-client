@@ -39,7 +39,7 @@ const CourseDetails = () => {
           <span>Rating: {course.ratings}</span>
         </p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy</button>
+          <button className="btn btn-primary">Buy Now</button>
           <button className="btn btn-secondary">Wish</button>
         </div>
       </div>

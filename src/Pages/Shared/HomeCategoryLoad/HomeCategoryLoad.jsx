@@ -25,13 +25,23 @@ export default function HomeCategoryLoad() {
     return (
         <div>
             <div className="flex justify-center">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-12 md:gap-12 xl:12">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 lg:gap-12 md:gap-12 xl:12">
                     {
-                        uniqueNames.map(bookCategory => (<div className="card card-compact bg-base-100 w-55 h-20 shadow-xl" key={bookCategory}>
+                        uniqueNames.map(bookCategory => (<div className="card card-compact bg-base-100 w-55 h-40 shadow-xl" key={bookCategory}>
 
                             <div className="card-body">
 
-                                <Link to={`/bookcategories/${bookCategory}`}><h2 className="card-title">{bookCategory}</h2></Link>
+                                <h2 className="card-title">{bookCategory}</h2>
+                                <Link to={`/bookcategories/${bookCategory}`}>
+                                    {/* <div className='pt-10'>
+                                    <button className='text-blue-600 bg-cyan-400 rounded-xl p-1'>View Products</button>
+                                </div> */}
+                                    <div className=" h-32 w-32">
+                                        <div className="absolute inset-x-0 bottom-0 h-18 flex justify-center">
+                                            <button className='bg-blue-500 rounded-xl p-1'>View Products</button>
+                                        </div>
+                                    </div>
+                                </Link>
 
                             </div>
                         </div>))
