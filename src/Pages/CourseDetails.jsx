@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
-import Navbar from "./Shared/Navbar/Navbar";
-import Footer from "./Shared/Footer/Footer";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -17,7 +15,6 @@ const CourseDetails = () => {
   console.log(id);
 
   return (<div>
-    <Navbar></Navbar>
 
     <div className="card lg:card-side bg-base-100 shadow-xl m-20">
       <figure>
@@ -45,7 +42,6 @@ const CourseDetails = () => {
       </div>
     </div>
 
-    <Footer></Footer>
   </div>);
 };
 

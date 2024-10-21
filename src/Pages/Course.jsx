@@ -1,7 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Navbar from "./Shared/Navbar/Navbar";
-import Footer from "./Shared/Footer/Footer";
 import { Link } from "react-router-dom";
 
 const Course = () => {
@@ -17,7 +15,6 @@ const Course = () => {
   console.log(course);
 
   return (<div>
-    <Navbar></Navbar>
     <div>
       <p className="text-3xl py-10">Available Courses: {course.length}</p>
     </div>
@@ -47,7 +44,6 @@ const Course = () => {
         </div>))
       }
     </div>
-    <Footer></Footer>
   </div>);
 };
 

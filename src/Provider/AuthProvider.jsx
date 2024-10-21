@@ -1,78 +1,114 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import {
-  createUserWithEmailAndPassword,
   getAuth,
+  createUserWithEmailAndPassword,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
   signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
-import app from "../Firebase/firebase.init";
+import app from "../../src/Firebase/firebase.init";
 
 export const AuthContext = createContext(null);
 
-const auth = getAuth(app);
-
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const auth = getAuth(app);
 
-  const createUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
-  const signIn = (email, password) => {
-    setLoading(true);
+  // Login with email
+  const loginWithEmail = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const googleSignIn = (provider) => {
-    setLoading(true);
-    return signInWithPopup(auth, provider);
+  // Register with email and send data to backend
+  const registerWithEmail = async (
+    email,
+    password,
+    name,
+    phone,
+    photo,
+    address
+  ) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const newUser = userCredential.user;
+
+      // Send user data to backend
+      const response = await fetch(
+        // "https://the-master-full-stack-project-server.vercel.app/users",
+        "http://localhost:5000/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid: newUser.uid,
+            email: newUser.email,
+            displayName: name || "User",
+            phone: phone,
+            photoUrl: photo || "https://i.ibb.co/k6hTYW1/Alien-Dev.jpg",
+            address: address,
+            isAdmin: false, // Default role false
+            isBlocked: false, // Default status false
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to register user data.");
+      }
+
+      return newUser;
+    } catch (error) {
+      console.error("Registration failed:", error.message);
+      throw error; // Re-throw error for further handling if needed
+    }
   };
 
-  const githubSignIn = (provider) => {
-    setLoading(true);
-    return signInWithPopup(auth, provider);
-  };
-
-  const updateUserProfile = (profile) => {
-    setLoading(true);
-    return updateProfile(auth.currentUser, profile);
-  };
-
-  const logOut = () => {
-    setLoading(true);
+  // Logout user
+  const logOutUser = () => {
     return signOut(auth);
   };
 
+  // Monitor auth state and fetch user data from backend
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
-      setUser(currentUser);
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        try {
+          const res = await fetch(
+            // `https://the-master-full-stack-project-server.vercel.app/user/${currentUser.uid}`
+            `http://localhost:5000/user/${currentUser.uid}`
+          );
+
+          if (!res.ok) {
+            throw new Error("Failed to fetch user data.");
+          }
+
+          const data = await res.json();
+          setUser(data);
+        } catch (error) {
+          console.error("Error fetching user data:", error.message);
+        }
+      } else {
+        setUser(null);
+      }
     });
 
     return () => {
-      unSubscribe();
+      unsubscribe();
     };
-  }, []);
-  const authInfo = {
-    user,
-    loading,
-    createUser,
-    signIn,
-    googleSignIn,
-    githubSignIn,
-    updateUserProfile,
-    logOut,
-  };
+  }, [auth]);
+
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{ registerWithEmail, user, loginWithEmail, logOutUser }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 
