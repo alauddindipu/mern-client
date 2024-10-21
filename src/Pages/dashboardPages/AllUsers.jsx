@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaEdit, FaUserShield } from "react-icons/fa";
-import { ImBlocked } from "react-icons/im";
+// import { ImBlocked } from "react-icons/im";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -123,10 +123,10 @@ const AllUsers = () => {
     }
   };
 
-  const handleClickedSetBlock = (user) => {
-    setSelectedUser(user);
-    setIsBlockModalOpen(true);
-  };
+  // const handleClickedSetBlock = (user) => {
+  //   setSelectedUser(user);
+  //   setIsBlockModalOpen(true);
+  // };
   const handleClickedSetUserOrAdminRole = (user) => {
     setSelectedUser(user);
     setIsAdminToggleModalOpen(true);
@@ -188,7 +188,7 @@ const AllUsers = () => {
                 >
                   <FaEdit />
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleClickedSetBlock(user)}
                   className={`p-2 rounded-full bg-red-500 text-white ${user.email === "super-admin@dev-master.com"
                       ? "opacity-50 cursor-not-allowed"
@@ -198,7 +198,7 @@ const AllUsers = () => {
                   disabled={user.email === "super-admin@dev-master.com"}
                 >
                   <ImBlocked />
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}

@@ -11,6 +11,8 @@ import LoginPage from "../Pages/LoginPage";
 import Profile from "../Pages/dashboardPages/Profile";
 import AllUsers from "../Pages/dashboardPages/AllUsers";
 import HomeLayout from "../Layout/HomeLayout";
+import AddCategory from "../Pages/dashboardPages/AddCategory";
+import AllCategories from "../Pages/dashboardPages/AllCategories";
 
 const routes = createBrowserRouter([
   {
@@ -66,6 +68,15 @@ const routes = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "category",
+        element: <AddCategory />,
+      },
+      {
+        path: "allCategory",
+        element: <AllCategories />,
+        loader: () => fetch("http://localhost:5000/category"),
       },
     ],
   },
