@@ -142,7 +142,7 @@ const AllUsers = () => {
             <th className="py-2 px-4 border">Name</th>
             <th className="py-2 px-4 border">Email</th>
             <th className="py-2 px-4 border">Image</th>
-            
+
             <th className="py-2 px-4 border">Role</th>
             <th className="py-2 px-4 border">Status</th>
             <th className="py-2 px-4 border">Actions</th>
@@ -170,13 +170,11 @@ const AllUsers = () => {
               <td className="py-2 px-4 border">
                 <button
                   onClick={() => handleClickedSetUserOrAdminRole(user)}
-                  className={`mr-2 p-2 rounded-full text-white ${
-                    user.isAdmin ? "bg-green-500" : "bg-blue-500"
-                  } ${
-                    user.email === "super-admin@dev-master.com"
+                  className={`mr-2 p-2 rounded-full text-white ${user.isAdmin ? "bg-green-500" : "bg-blue-500"
+                    } ${user.email === "super-admin@dev-master.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
-                  }`}
+                    }`}
                   title="Toggle Admin/User"
                   disabled={user.email === "super-admin@dev-master.com"}
                 >
@@ -192,11 +190,10 @@ const AllUsers = () => {
                 </button>
                 <button
                   onClick={() => handleClickedSetBlock(user)}
-                  className={`p-2 rounded-full bg-red-500 text-white ${
-                    user.email === "super-admin@dev-master.com"
+                  className={`p-2 rounded-full bg-red-500 text-white ${user.email === "super-admin@dev-master.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
-                  }`}
+                    }`}
                   title="Block User"
                   disabled={user.email === "super-admin@dev-master.com"}
                 >
@@ -284,9 +281,8 @@ const AllUsers = () => {
             </h3>
             <button
               onClick={handleBlock}
-              className={`bg-red-500 text-white px-4 py-2 rounded ${
-                selectedUser.isBlocked ? "bg-green-500" : "bg-red-500"
-              }`}
+              className={`bg-red-500 text-white px-4 py-2 rounded ${selectedUser.isBlocked ? "bg-green-500" : "bg-red-500"
+                }`}
             >
               {selectedUser.isBlocked ? "Unblock" : "Block"}
             </button>

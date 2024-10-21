@@ -4,7 +4,6 @@ import { AuthContext } from "../Provider/AuthProvider";
 import {
   FaUser,
   FaUsers,
-  FaEnvelope,
   FaSignOutAlt,
   FaPenAlt,
 } from "react-icons/fa";
@@ -62,32 +61,7 @@ const DashboardSidebarContent = () => {
                   <FaUsers className="inline mr-2" />
                   All Users
                 </NavLink>
-                <NavLink
-                  to="/dashboard/createMessage"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-blue-600"
-                      : "text-gray-600 hover:text-blue-500"
-                  }
-                >
-                  <FaPenAlt className="inline mr-2" />
-                  Create Message
-                </NavLink>
               </>
-            )}
-            {/* User Links */}
-            {!user?.isAdmin && (
-              <NavLink
-                to="/dashboard/messages"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-blue-500"
-                }
-              >
-                <FaEnvelope className="inline mr-2" />
-                Messages
-              </NavLink>
             )}
           </>
         )}

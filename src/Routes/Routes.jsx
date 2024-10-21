@@ -9,9 +9,6 @@ import CategoryDetails from "../Pages/CategoryDetails";
 import RegisterPage from "../Pages/RegisterPage";
 import LoginPage from "../Pages/LoginPage";
 import Profile from "../Pages/dashboardPages/Profile";
-import Messages from "../Pages/dashboardPages/Messages";
-import CreateMessage from "../Pages/dashboardPages/CreateMessages";
-import MessageDetails from "../Pages/dashboardPages/MessageDetails";
 import AllUsers from "../Pages/dashboardPages/AllUsers";
 import HomeLayout from "../Layout/HomeLayout";
 
@@ -28,7 +25,7 @@ const routes = createBrowserRouter([
         path: "/login",
         element: <LoginPage></LoginPage>
       },
-       {
+      {
         path: "/register",
         element: <RegisterPage></RegisterPage>
       }
@@ -54,7 +51,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout/>,
+    element: <DashboardLayout />,
     children: [
       {
         path: "",
@@ -62,25 +59,13 @@ const routes = createBrowserRouter([
       },
       {
         path: "allUsers",
-        element:(<PrivateRoute>
+        element: (<PrivateRoute>
           <AllUsers />
         </PrivateRoute>),
       },
       {
         path: "profile",
-        element: <Profile/>,
-      },
-      {
-        path: "messages",
-        element: <Messages />,
-      },
-      {
-        path: "messages/:id",
-        element: <MessageDetails />,
-      },
-      {
-        path: "createMessage",
-        element: <CreateMessage />,
+        element: <Profile />,
       },
     ],
   },
