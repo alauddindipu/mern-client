@@ -4,7 +4,28 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const TotalProducts = () => {
     const loadedProducts = useLoaderData();
-    console.log(loadedProducts);
+    //console.log(loadedProducts);
+    const [users, setUsers] = useState(loadedProducts);
+
+
+
+    const handleDelete = (_id) => {
+        console.log(_id);
+        fetch(`http://localhost:5000/product/${_id}`, {
+            method: "DELETE",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.deletedCount) {
+                    toast.success("User Deleted Successfully", {
+                        position: "top-right",
+                    });
+                    const remainingUsers = users.filter((product) => product._id !== _id);
+                    setUsers(remainingUsers);
+                }
+            });
+    };
     return (
         <div className="mt-14">
             <div className="flex justify-center justify-items-center">
@@ -21,47 +42,70 @@ const TotalProducts = () => {
                     </button>
                 </Link>
             </div>
-            <table className="border-collapse w-2/3 mx-auto">
+            <table className="min-w-full bg-white border">
                 <thead>
-                    <tr>
-                        <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                            Product Name
-                        </th>
-                        <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                        Product Category
-                        </th>
+                    <tr className="bg-gray-200 text-gray-600 text-left">
+                        <th className="py-2 px-4 border">#</th>
+                        <th className="py-2 px-4 border">Name</th>
+                        <th className="py-2 px-4 border">Price</th>
+                        <th className="py-2 px-4 border">Image</th>
 
-                        {/* <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                            Actions
-                        </th> */}
+                        <th className="py-2 px-4 border">Description</th>
+                        <th className="py-2 px-4 border">Status</th>
+                        <th className="py-2 px-4 border">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {loadedProducts.map((c) => (
-                        <tr
-                            key={c._id}
-                            className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
-                        >
-                            <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                                {/* <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
-                                    {" "}
-                                    Prouct Category
-                                </span> */}
-                                {c.productName}
+                    {loadedProducts.map((product, index) => (
+                        <tr key={product._id} className="hover:bg-gray-100">
+                            <td className="py-2 px-4 border">{index + 1}</td>
+                            <td className="py-2 px-4 border">{product?.productName || "N/A"}</td>
+                            <td className="py-2 px-4 border">{product?.resalePrice}</td>
+                            <td className="py-2 px-4 border">
+                                <img
+                                    src={product?.image || "https://via.placeholder.com/50"}
+                                    alt="product"
+                                    className="w-10 rounded-full"
+                                />
                             </td>
-                            <td className="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                                {/* <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
-                                    {" "}
-                                    product Name
-                                </span> */}
-                                {c.category}
+                            <td className="py-2 px-4 border">
+                                {/* {product.isAdmin ? "Admin" : "User"} */}
+                                {product.description}
                             </td>
+                            <td className="py-2 px-4 border">
+                                {/* {user.isBlocked ? "Blocked" : "Active"} */}{product.status}
+                            </td>
+                            <td className="py-2 px-4 border">
 
+                                <Link to={`/edit/${product._id}`}>
+                                    <button
+                                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 
+          border border-blue-500 hover:border-transparent rounded-none"
+                                    >
+                                        Edit
+                                    </button>
+                                </Link>
+                                &nbsp;&nbsp;&nbsp;
+                                <button
+                                    onClick={() => handleDelete(product._id)}
+                                    className="bg-red-500 hover:bg-orange-700 text-white font-semibold py-2 px-4 
+          border border-blue-500 hover:border-transparent rounded-none"
+                                >
+                                    Delete
+                                </button>
+                                {/* <button
+                                    onClick={() => openEditModal(product)}
+                                    className="mr-2 p-2 rounded-full bg-yellow-500 text-white"
+                                    title="Edit User"
+                                >
+                                    <FaEdit />
+                                </button> */}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div >
     );
 };
 

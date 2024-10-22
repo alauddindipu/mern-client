@@ -33,12 +33,12 @@ const Products = () => {
     fetchProducts(); // Load users when the component mounts
   }, []);
 
-  
+
   // Open the edit modal with the user's current details
   const openEditModal = (product) => {
     setSelectedUser(product);
     setFormData({
-      displayName: product.productName || "",
+      displayName: product.productName || "Same",
       phone: product.phone || "",
       photoUrl: product.image || "",
       address: product.resalePrice || "",
@@ -67,7 +67,7 @@ const Products = () => {
           body: JSON.stringify(updatedUser),
         }
       );
-      fetchUsers(); // Reload users after update
+      //fetchUsers(); // Reload users after update
       setIsEditModalOpen(false);
     } catch (error) {
       console.error("Error updating user:", error);
@@ -78,10 +78,10 @@ const Products = () => {
   //   setSelectedUser(user);
   //   setIsBlockModalOpen(true);
   // };
-//   const handleClickedSetUserOrAdminRole = (user) => {
-//     setSelectedUser(user);
-//     setIsAdminToggleModalOpen(true);
-//   };
+  //   const handleClickedSetUserOrAdminRole = (user) => {
+  //     setSelectedUser(user);
+  //     setIsAdminToggleModalOpen(true);
+  //   };
 
   return (
     <div className="container mx-auto p-4">

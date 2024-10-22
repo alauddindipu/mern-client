@@ -16,6 +16,7 @@ import AllCategories from "../Pages/dashboardPages/AllCategories";
 import AddProductUsingReactState from "../Pages/dashboardPages/AddProductUsingReactState";
 import TotalProducts from "../Pages/dashboardPages/TotalProducts.jsx";
 import AllProducts from "../Pages/dashboardPages/AllProducts.jsx";
+import Edit from "../Pages/dashboardPages/Edit.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -51,7 +52,11 @@ const routes = createBrowserRouter([
           <CategoryDetails></CategoryDetails>
         </PrivateRoute>),
         loader: ({ params }) => fetch(`http://localhost:5000/bookcategories/${params.category}`)
-      }
+      }, {
+        path: "edit/:id",
+        element: <Edit></Edit>,
+        loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`),
+      },
     ]
   },
   {
@@ -88,14 +93,15 @@ const routes = createBrowserRouter([
       },
       {
         path: "allproducts",
-        element:<AllProducts/>
+        element: <AllProducts />
       },
-      // {
-      //   path: "allproducts",
-      //   element: <AllProducts />,
-      //   loader: () => fetch("http://localhost:5000/allproducts"),
-      // },
-      
+      {
+        path: "totalProducts",
+        element: <TotalProducts />,
+        loader: () => fetch("http://localhost:5000/totalProducts"),
+      },
+
+
     ],
   },
 ]);

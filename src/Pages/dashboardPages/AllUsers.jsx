@@ -87,7 +87,7 @@ const AllUsers = () => {
   const openEditModal = (user) => {
     setSelectedUser(user);
     setFormData({
-      displayName: user.displayName || "",
+      displayName: user.displayName || "use",
       phone: user.phone || "",
       photoUrl: user.photoUrl || "",
       address: user.address || "",

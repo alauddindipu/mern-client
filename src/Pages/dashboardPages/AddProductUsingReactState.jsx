@@ -10,7 +10,7 @@ const AddProductUsingReactState = () => {
     // const [categoryObject, setCategoryObject] = useState({});
 
 
-     const categoryObject = useLoaderData();
+    const categoryObject = useLoaderData();
     //  console.log(categoryObject);
 
     const [formData, setFormData] = useState({
@@ -23,8 +23,8 @@ const AddProductUsingReactState = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     // useTitle('Add Product');
-     //const imageHostKey = process.env.REACT_APP_imgbb_key;
-     const imageHostKey = 'ec39a7a11a2b7d1d5ffaae57fee1fc5e';
+    //const imageHostKey = process.env.REACT_APP_imgbb_key;
+    const imageHostKey = 'ec39a7a11a2b7d1d5ffaae57fee1fc5e';
 
     const validateForm = () => {
         const newErrors = {};
@@ -115,10 +115,10 @@ const AddProductUsingReactState = () => {
 
                 <div className="flex justify-center justify-items-center">
                     <h1 className="text-3xl font-bold text-center mb-10">
-                    Add a Product
+                        Add a Product
                     </h1>
                     &nbsp;&nbsp;&nbsp;
-                    <Link to="/dashboard/allProducts">
+                    <Link to="/dashboard/totalProducts">
                         <button
                             className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white 
           py-2 px-4 border border-blue-500 hover:border-transparent rounded-tl-md rounded-br-md"
@@ -184,7 +184,7 @@ const AddProductUsingReactState = () => {
                                 >
                                     <option value="">Select category</option>
                                     {categoryObject.map((c) => (
-                                       <option key={c.cid} value={c.cname}>
+                                        <option key={c.cid} value={c.cname}>
                                             {c.cname}
                                         </option>
                                     ))}
