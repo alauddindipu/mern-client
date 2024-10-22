@@ -4,27 +4,6 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const AllCategories = () => {
     const loadedUsers = useLoaderData();
-    // const [users, setUsers] = useState(loadedUsers);
-    // //console.log(loadedUsers);
-
-    // const handleDelete = (_id) => {
-    //     console.log(_id);
-    //     fetch(`http://localhost:5000/user/${_id}`, {
-    //         method: "DELETE",
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log(data);
-    //             if (data.deletedCount) {
-    //                 toast.success("User Deleted Successfully", {
-    //                     position: "top-right",
-    //                 });
-    //                 const remainingUsers = users.filter((user) => user._id !== _id);
-    //                 setUsers(remainingUsers);
-    //             }
-    //         });
-    // };
-
     return (
         <div className="mt-14">
             <div className="flex justify-center justify-items-center">

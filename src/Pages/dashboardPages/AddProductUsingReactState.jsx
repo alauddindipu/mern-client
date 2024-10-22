@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../src/Provider/AuthProvider';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 // import useTitle from '../../../hooks/useTitle';
 
 const AddProductUsingReactState = () => {
     const { user } = useContext(AuthContext);
     const [categories, setCategories] = useState([]);
-    const [categoryObject, setCategoryObject] = useState({});
+    // const [categoryObject, setCategoryObject] = useState({});
+
+
+     const categoryObject = useLoaderData();
+    //  console.log(categoryObject);
+
     const [formData, setFormData] = useState({
         name: '',
         resalePrice: '',
@@ -18,27 +23,8 @@ const AddProductUsingReactState = () => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     // useTitle('Add Product');
-    // const imageHostKey = process.env.REACT_APP_imgbb_key;
-
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const res = await fetch('https://localhost:5000/categories');
-                const data = await res.json();
-                setCategories(data);
-
-                const tempCategoryObject = {};
-                data.forEach(category => {
-                    tempCategoryObject[category.name] = category._id;
-                });
-                setCategoryObject(tempCategoryObject);
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-        };
-
-        fetchCategories();
-    }, []);
+     //const imageHostKey = process.env.REACT_APP_imgbb_key;
+     const imageHostKey = 'ec39a7a11a2b7d1d5ffaae57fee1fc5e';
 
     const validateForm = () => {
         const newErrors = {};
@@ -98,7 +84,7 @@ const AddProductUsingReactState = () => {
                 };
 
                 // Save product information to the database
-                const result = await fetch('https://localhost:5000/products', {
+                const result = await fetch('http://localhost:5000/products', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
@@ -109,10 +95,11 @@ const AddProductUsingReactState = () => {
                 const data = await result.json();
                 if (data.success) {
                     toast.success(`${formData.name} is added successfully`);
-                    navigate('/dashboard/myproducts');
-                } else {
-                    toast.error('Failed to add product.');
+                    //navigate('/dashboard/products');//will change here the path
                 }
+                //  else {
+                //     toast.error('Failed to add product.');// why not success??
+                // }
             } else {
                 toast.error('Image upload failed. Please try again.');
             }
@@ -125,7 +112,22 @@ const AddProductUsingReactState = () => {
     return (
         <div>
             <div className='w-10/12 p-7'>
-                <h2 className="text-2xl text-[#FF652E] md:text-center text-left font-bold">Add a Product</h2>
+
+                <div className="flex justify-center justify-items-center">
+                    <h1 className="text-3xl font-bold text-center mb-10">
+                    Add a Product
+                    </h1>
+                    &nbsp;&nbsp;&nbsp;
+                    <Link to="/dashboard/allProducts">
+                        <button
+                            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white 
+          py-2 px-4 border border-blue-500 hover:border-transparent rounded-tl-md rounded-br-md"
+                        >
+                            Products List
+                        </button>
+                    </Link>
+                </div>
+
                 <form onSubmit={handleSubmit} className="border shadow-lg py-2 px-6 mt-3 flex flex-col md:flex-row">
                     <div>
                         <div className="form-control w-full max-w-xs border p-2 border-indigo-400 mb-3">
@@ -181,11 +183,12 @@ const AddProductUsingReactState = () => {
                                     className="input input-bordered w-full max-w-xs rounded-none text-sm bg-white"
                                 >
                                     <option value="">Select category</option>
-                                    {Object.keys(categoryObject).map((category, index) => (
-                                        <option key={index} value={category}>
-                                            {category}
+                                    {categoryObject.map((c) => (
+                                       <option key={c.cid} value={c.cname}>
+                                            {c.cname}
                                         </option>
                                     ))}
+
                                 </select>
                             </div>
                             {errors.category && <p className='text-red-500 text-xs'>{errors.category}</p>}

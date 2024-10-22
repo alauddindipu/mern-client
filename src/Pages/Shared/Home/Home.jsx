@@ -9,7 +9,7 @@ import Search from "../../Search/Search";
 import Timeline from "../Timeline/Timeline";
 import HeroSecond from "../HeroSecond/HeroSecond";
 import Faq from "../../Faq/Faq";
-import AddProductUsingReactState from "../../AddProductUsingReactState";
+import AddProductUsingReactState from "../../dashboardPages/AddProductUsingReactState";
 
 export default function Home() {
 

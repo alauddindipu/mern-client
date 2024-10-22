@@ -13,6 +13,9 @@ import AllUsers from "../Pages/dashboardPages/AllUsers";
 import HomeLayout from "../Layout/HomeLayout";
 import AddCategory from "../Pages/dashboardPages/AddCategory";
 import AllCategories from "../Pages/dashboardPages/AllCategories";
+import AddProductUsingReactState from "../Pages/dashboardPages/AddProductUsingReactState";
+import TotalProducts from "../Pages/dashboardPages/TotalProducts.jsx";
+import AllProducts from "../Pages/dashboardPages/AllProducts.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -78,6 +81,21 @@ const routes = createBrowserRouter([
         element: <AllCategories />,
         loader: () => fetch("http://localhost:5000/category"),
       },
+      {
+        path: "products",//to get categories in products page drop down
+        element: <AddProductUsingReactState />,
+        loader: () => fetch("http://localhost:5000/categories"),
+      },
+      {
+        path: "allproducts",
+        element:<AllProducts/>
+      },
+      // {
+      //   path: "allproducts",
+      //   element: <AllProducts />,
+      //   loader: () => fetch("http://localhost:5000/allproducts"),
+      // },
+      
     ],
   },
 ]);
