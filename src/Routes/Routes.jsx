@@ -15,7 +15,6 @@ import AddCategory from "../Pages/dashboardPages/AddCategory";
 import AllCategories from "../Pages/dashboardPages/AllCategories";
 import AddProductUsingReactState from "../Pages/dashboardPages/AddProductUsingReactState";
 import TotalProducts from "../Pages/dashboardPages/TotalProducts.jsx";
-import AllProducts from "../Pages/dashboardPages/AllProducts.jsx";
 import Edit from "../Pages/dashboardPages/Edit.jsx";
 
 const routes = createBrowserRouter([
@@ -37,20 +36,29 @@ const routes = createBrowserRouter([
       }
       , {
         path: "/products",
-        element: (<PrivateRoute>
-          <Course></Course>
-        </PrivateRoute>)
-      }, {
+        element:<Course></Course>
+      }
+      // , {
+      //   path: "/products",
+      //   element: (<PrivateRoute>
+      //     <Course></Course>
+      //   </PrivateRoute>)
+      // }
+     
+      , {
         path: "/products/:id",
-        element: (<PrivateRoute>
-          <CourseDetails></CourseDetails>
-        </PrivateRoute>),
+        element:<CourseDetails></CourseDetails>, 
+        // (<PrivateRoute>
+        //   <CourseDetails></CourseDetails>
+        // </PrivateRoute>),
         loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`)
-      }, {
+      }, 
+      {
         path: "/bookcategories/:category",
-        element: (<PrivateRoute>
-          <CategoryDetails></CategoryDetails>
-        </PrivateRoute>),
+        element: <CategoryDetails></CategoryDetails>,
+        // (<PrivateRoute>
+        //   <CategoryDetails></CategoryDetails>
+        // </PrivateRoute>),
         loader: ({ params }) => fetch(`http://localhost:5000/bookcategories/${params.category}`)
       }, {
         path: "edit/:id",
@@ -90,10 +98,6 @@ const routes = createBrowserRouter([
         path: "products",//to get categories in products page drop down
         element: <AddProductUsingReactState />,
         loader: () => fetch("http://localhost:5000/categories"),
-      },
-      {
-        path: "allproducts",
-        element: <AllProducts />
       },
       {
         path: "totalProducts",

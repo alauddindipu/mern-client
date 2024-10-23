@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 export default function HomeCategoryLoad() {
 
+   
+    const [products, setProducts] = useState([]);
 
-    const [bookCategories, setBookCategories] = useState([]);
-    useEffect(() => {
-        fetch(`http://localhost:5000/bookcategories`)
-            .then(res => res.json())
-            .then(data => setBookCategories(data));
-    }, []);
-    console.log(bookCategories);
+    // Fetch all users from the backend
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/allproducts"
+      );
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
-    let uniqueNames = bookCategories.map(item => item.category).filter((value, index, self) => self.indexOf(value) === index);
+  useEffect(() => {
+    fetchProducts(); // Load users when the component mounts
+  }, []);
+
+    let uniqueNames = products.map(item => item.category).filter((value, index, self) => self.indexOf(value) === index);
 
     //let uniqueCategoryId = bookCategories.map(item => item.categoryid).filter((value, index, self) => self.indexOf(value) === index);
 

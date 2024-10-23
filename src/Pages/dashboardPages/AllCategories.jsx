@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const AllCategories = () => {
     const loadedUsers = useLoaderData();
+    console.log(loadedUsers);
     return (
         <div className="mt-14">
             <div className="flex justify-center justify-items-center">

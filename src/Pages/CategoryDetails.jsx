@@ -4,13 +4,13 @@ import { useLoaderData } from "react-router-dom";
 
 
 const CategoryDetails = () => {
+    const { pcat } = useParams();
     const selectedCategory = useLoaderData();
-    console.log(selectedCategory);
+    console.log(pcat);
 
     return (<div>
-        <div>Category-wise</div>
         <div>
-            <p className="text-3xl py-10">{selectedCategory.category} Available Courses: {selectedCategory.length}</p>
+            <p className="text-3xl py-10">{pcat} Category-wise Available Courses: {selectedCategory.length}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 md:gap-12 xl:12 mb-20">
             {
