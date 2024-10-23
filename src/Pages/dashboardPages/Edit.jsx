@@ -28,10 +28,10 @@ const Edit = () => {
             .then((data) => {
                 console.log(data);
                 if (data.modifiedCount) {
-                    toast.success("Updated Successfully", {
+                    toast.success("Updated Successfully", {  
                         position: "top-right",
                     });
-                    //navigate("/dashborad/totalProducts");
+                    navigate("/dashboard/totalProducts");
                 }
             });
     };
@@ -42,7 +42,7 @@ const Edit = () => {
                     Update a Product :
                 </h1>
                 &nbsp;&nbsp;&nbsp;
-                <Link to="/">
+                <Link to="/dashboard/products">
                     <button
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white 
     py-2 px-4 border border-blue-500 hover:border-transparent rounded-tl-md rounded-br-md"
@@ -51,7 +51,7 @@ const Edit = () => {
                     </button>
                 </Link>
                 &nbsp;&nbsp;&nbsp;
-                <Link to="/totalProducts">
+                <Link to="/dashboard/totalProducts">
                     <button
                         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white 
     py-2 px-4 border border-blue-500 hover:border-transparent rounded-tl-md rounded-br-md"
@@ -74,9 +74,9 @@ const Edit = () => {
                         <input
                             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
         leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                            id="name"
+                            id="productName"
                             type="text"
-                            name="name"
+                            name="productName"
                             defaultValue={loadedProduct.productName}
                         />
                     </div>
