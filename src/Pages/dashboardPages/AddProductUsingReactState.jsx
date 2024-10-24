@@ -80,7 +80,7 @@ const AddProductUsingReactState = () => {
                     resalePrice: formData.resalePrice,
                     postingTime: new Date(),
                     description: formData.description,
-                    status: 'available',
+                    status: formData.status,
                 };
 
                 // Save product information to the database
@@ -201,6 +201,18 @@ const AddProductUsingReactState = () => {
                                     type="text"
                                     name="description"
                                     value={formData.description}
+                                    onChange={handleInputChange}
+                                    className="input input-bordered w-full max-w-xs rounded-none bg-white"
+                                />
+                            </div>
+                        </div>
+                        <div className="form-control w-full max-w-xs border p-2 border-indigo-400 mb-3">
+                            <div className='flex input-bordered rounded-none'>
+                                <label className="label"> <span className="label-text">Rating:</span></label>
+                                <input
+                                    type="text"
+                                    name="status"
+                                    value={formData.status}
                                     onChange={handleInputChange}
                                     className="input input-bordered w-full max-w-xs rounded-none bg-white"
                                 />

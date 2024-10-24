@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import Banner from "../Banner/Banner";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import Contact from "../Contact/Contact";
 import HomeContentLoad from "../HomeContentLoad/HomeContentLoad";
 import HomeCategoryLoad from "../HomeCategoryLoad/HomeCategoryLoad";
-import Search from "../../Search/Search";
 import Timeline from "../Timeline/Timeline";
 import HeroSecond from "../HeroSecond/HeroSecond";
 import Faq from "../../Faq/Faq";
-import AddProductUsingReactState from "../../dashboardPages/AddProductUsingReactState";
 
 export default function Home() {
 

@@ -36,7 +36,7 @@ const routes = createBrowserRouter([
         element: <RegisterPage></RegisterPage>
       }
       , {
-        path: "/course",
+        path: "/totalProducts",
         element: <Course></Course>
       }
       // , {
@@ -46,7 +46,7 @@ const routes = createBrowserRouter([
       //   </PrivateRoute>)
       // }
 
-      , 
+      ,
       {
         path: "/productDetails/:id",
         element: <ProductDetails></ProductDetails>,
@@ -55,7 +55,7 @@ const routes = createBrowserRouter([
       {// should be in child as router dahboard +++++++++++++++++++++++++
         path: "buySummary/:userId",
         element: <BuySummary />,
-        loader: ({ params }) =>  fetch(`http://localhost:5000/buySummary/${params.userId}`),
+        loader: ({ params }) => fetch(`http://localhost:5000/buySummary/${params.userId}`),
       },
 
       {
@@ -97,7 +97,7 @@ const routes = createBrowserRouter([
         element: <AllCategories />,
         loader: () => fetch("http://localhost:5000/category"),
       },
-      
+
       {
         path: "products",//to get categories in products page drop down
         element: <AddProductUsingReactState />,

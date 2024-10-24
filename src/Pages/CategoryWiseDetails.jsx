@@ -24,9 +24,9 @@ export default function CategoryWiseDetails() {
                             <p>
                                 <span className="bg-warning p-2 rounded">
                                     {c.resalePrice}
-                                    BDT
+                                    $
                                 </span>{" "}
-                                <span className="bg-success p-2 rounded">{c.status}</span>
+                                <span className="bg-success p-2 rounded">{c.status}/5</span>
                             </p>
                             <div className="card-actions justify-end">
                                 <button className="btn btn-primary">

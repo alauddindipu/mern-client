@@ -20,11 +20,11 @@ export default function HomeContentLoad() {
                 <img src={c.image} alt={c.productName} />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{c.productName}</h2>
-                <p>{c.category}</p>
+                <p className="card-title">{c.productName}</p>
                 <p>
-                  {/* <span className="bg-warning p-2 rounded">{c.price} BDT</span> */}
-                  <span className="bg-success p-2 rounded">{c.resalePrice}</span>
+                  <span className="bg-warning p-2 rounded">{c.status}/5</span>
+                  <span className='p-1'></span>
+                  <span className="bg-success p-2 rounded">{c.resalePrice}$</span>
                 </p>
               </div>
             </div>))
