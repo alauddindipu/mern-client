@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Home from "../Pages/Shared/Home/Home";
 import PrivateRoute from "./PrivateRoute";
-import CourseDetails from "../Pages/CourseDetails";
 import Course from "../Pages/Course";
 import ErrorShow from "../Pages/Shared/ErrorShow/ErrorShow";
 import RegisterPage from "../Pages/RegisterPage";
@@ -17,6 +16,7 @@ import TotalProducts from "../Pages/dashboardPages/TotalProducts.jsx";
 import Edit from "../Pages/dashboardPages/Edit.jsx";
 import CategoryWiseDetails from "../Pages/CategoryWiseDetails.jsx";
 import ProductDetails from "../Pages/ProductDetails.jsx";
+import BuySummary from "../Pages/BuySummary.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -46,15 +46,16 @@ const routes = createBrowserRouter([
       //   </PrivateRoute>)
       // }
 
-      , {
-        path: "/products/:id",
-        element: <CourseDetails></CourseDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`)
-      },
+      , 
       {
         path: "/productDetails/:id",
         element: <ProductDetails></ProductDetails>,
         loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+      },
+      {// should be in child as router dahboard +++++++++++++++++++++++++
+        path: "buySummary/:userId",
+        element: <BuySummary />,
+        loader: ({ params }) =>  fetch(`http://localhost:5000/buySummary/${params.userId}`),
       },
 
       {
@@ -96,6 +97,7 @@ const routes = createBrowserRouter([
         element: <AllCategories />,
         loader: () => fetch("http://localhost:5000/category"),
       },
+      
       {
         path: "products",//to get categories in products page drop down
         element: <AddProductUsingReactState />,

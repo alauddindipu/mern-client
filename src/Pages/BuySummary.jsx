@@ -1,14 +1,15 @@
 
 import { Link, useLoaderData } from "react-router-dom";
 
-const AllCategories = () => {
-    const loadedUsers = useLoaderData();
-    console.log(loadedUsers);
+const BuySummary = () => {
+    const loadedBuyerInfo = useLoaderData();
+    console.log(loadedBuyerInfo);
+    
     return (
         <div className="mt-14">
             <div className="flex justify-center justify-items-center">
                 <h1 className="text-3xl font-bold text-center mb-10">
-                    All Categories: {loadedUsers.length}
+                    All Categories: {loadedBuyerInfo.length}
                 </h1>
                 &nbsp;&nbsp;&nbsp;
                 <Link to="/dashboard/category">
@@ -24,15 +25,15 @@ const AllCategories = () => {
                 <thead>
                     <tr>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                            Category Name
+                        Product Name
                         </th>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                            Category Id
+                        Product Price($)
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {loadedUsers.map((c) => (
+                    {loadedBuyerInfo.map((c) => (
                         <tr
                             key={c._id}
                             className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
@@ -40,16 +41,16 @@ const AllCategories = () => {
                             <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                                     {" "}
-                                    Category name
+                                    Product Name
                                 </span>
-                                {c.cname}
+                                {c.productName}
                             </td>
                             <td className="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                                     {" "}
-                                    Category Id
+                                    Product Price
                                 </span>
-                                {c.cid}
+                                {c.resalePrice}
                             </td>
                         </tr>
                     ))}
@@ -59,4 +60,4 @@ const AllCategories = () => {
     );
 };
 
-export default AllCategories;
+export default BuySummary;

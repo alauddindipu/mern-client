@@ -2,21 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FiEdit } from "react-icons/fi"; // Importing react-icon
-import toast from "react-hot-toast";
 
-export default function ProductDetails() {
-
-    const { id } = useParams();
-
-    const [course, setCourse] = useState([]);
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
-            .then(res => res.json())
-            .then(data => setCourse(data));
-    }, []);
-    // console.log(course);
-    // console.log(id);
+const BuyProduct = () => {
 
 
 
@@ -35,21 +22,27 @@ export default function ProductDetails() {
       event.preventDefault();
 
       const form = new FormData(event.currentTarget);
-      
-      const userId=user._id;
-      const displayName = form.get("displayName");
-      const phone = form.get("phone");
-      const email = form.get("email");
-      const address = form.get("address");
-      const productName = course.productName;
-      const resalePrice = course.resalePrice;
-      const productId=course._id;
-     
 
-      const updateBuyer = { userId, displayName, phone, email,address,productName,resalePrice,productId};
+      // const displayName = form.get("displayName");
+      // const phone = form.get("phone");
+      // const email = form.get("email");
+      // const address = form.get("address");
+      // const productName = course.productName;
+      // const resalePrice = course.resalePrice;
 
-        
-  
+
+ 
+      //const data = new FormData()
+      form.append("displayName", displayName);
+      form.append("phone", phone);
+      form.append("email", email);
+      form.append("address", address);
+
+      //const updateBuyer = { displayName, phone, email,address,productName,resalePrice};
+      const updateBuyer = { displayName, phone, email,address};
+       
+
+
         // Make API call to update user information
         fetch("http://localhost:5000/buy",{
             method: "POST",
@@ -62,7 +55,7 @@ export default function ProductDetails() {
           .then((data) => {
               console.log(data);
               if (data.insertedId) {
-                  toast.success("Buying Successful", {
+                  toast.success("Category Added Successfully", {
                       position: "top-right",
                   });
               }
@@ -70,7 +63,7 @@ export default function ProductDetails() {
           });
           
         // Close the modal upon successful update
-        setIsEditModalOpen(false);
+        //setIsEditModalOpen(false);
   };
     
   
@@ -88,7 +81,7 @@ export default function ProductDetails() {
 
     return (
         <div>
-            <div className="card lg:card-side bg-base-100 shadow-xl m-20">
+             <div className="card lg:card-side bg-base-100 shadow-xl m-20">
                 <figure>
                     <img src={course.image} alt={course.productName} />
                 </figure>
@@ -114,10 +107,8 @@ export default function ProductDetails() {
                 </div>
             </div>
 
-
-
 {/* Invisible div to use this info in modal edit */}
-            <div className="mt-6 w-full invisible">
+<div className="mt-6 w-full invisible">
         <h3 className="text-xl font-bold text-gray-700">Profile Details</h3>
         <hr />
         <ul className="mt-3 text-gray-600 space-y-2">
@@ -141,19 +132,17 @@ export default function ProductDetails() {
       </div>
 
 {/* Edit Button with React Icon */}
-{/* {!user?.isBlocked ? (
+{!user?.isBlocked ? (
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 transition-transform transform hover:scale-105"
           onClick={handleOpenEditModal}
         >
           <FiEdit size={24} />
         </button>
-      ) : null} */}
+      ) : null}
 {/* Edit Modal */}
 {isEditModalOpen && (
-         <form onSubmit={handleSave}>
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-         
           <div className="bg-white p-6 rounded-lg w-1/3">
             <h3 className="text-xl mb-4">Buyer Information</h3>
             <div className="mb-4">
@@ -161,7 +150,6 @@ export default function ProductDetails() {
               <input
                 type="text"
                 className="w-full p-2 border rounded"
-                name='displayName'
                 value={formData.displayName}
                 onChange={(e) =>
                   setFormData({ ...formData, displayName: e.target.value })
@@ -173,7 +161,6 @@ export default function ProductDetails() {
               <input
                 type="text"
                 className="w-full p-2 border rounded"
-                name='phone'
                 value={formData.phone}
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
@@ -186,7 +173,6 @@ export default function ProductDetails() {
                 type="text"
                 className="w-full p-2 border rounded"
                 value={formData.email}
-                name='email'
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
@@ -198,16 +184,14 @@ export default function ProductDetails() {
                 type="text"
                 className="w-full p-2 border rounded"
                 value={formData.address}
-                name='address'
                 onChange={(e) =>
                   setFormData({ ...formData, address: e.target.value })
                 }
               />
             </div>
             <button
-              //onClick={handleSave} 
+              onClick={handleSave}
               className="bg-blue-500 text-white p-2 rounded mr-2"
-              type='submit'
             >
               Buy Confirm
             </button>
@@ -219,11 +203,9 @@ export default function ProductDetails() {
             </button>
           </div>
         </div>
-        
-        </form>
       )}
-
-
         </div>
-    )
+    );
 }
+
+export default BuyProduct;

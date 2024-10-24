@@ -15,7 +15,7 @@ export default function HomeContentLoad() {
       <div className="flex justify-center">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 lg:gap-12 md:gap-12 xl:12">
           {
-            course.map(c => (<div className="card card-compact bg-base-100 w-40 h-60 shadow-xl" key={c.course_id}>
+            course.map(c => (<div className="card card-compact bg-base-100 w-40 h-60 shadow-xl" key={c._id}>
               <figure>
                 <img src={c.image} alt={c.productName} />
               </figure>
