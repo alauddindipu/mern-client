@@ -59,12 +59,48 @@ const DashboardSidebarContent = () => {
                   }
                 >
                   <FaUsers className="inline mr-2" />
-                  All Users
+                  Users List
+                </NavLink>
+                <NavLink
+                  to="/dashboard/allCategory"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-blue-500"
+                  }
+                >
+                  <FaUsers className="inline mr-2" />
+                  Product Category
+                </NavLink>
+                <NavLink
+                  to="/dashboard/totalProducts"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-blue-500"
+                  }
+                >
+                  <FaUsers className="inline mr-2" />
+                  Products List
                 </NavLink>
               </>
             )}
           </>
         )}
+
+
+        {/* buySummary/:userId */}
+        <NavLink
+          to="/dashboard/totalProducts"
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-600"
+              : "text-gray-600 hover:text-blue-500"
+          }
+        >
+          <FaUsers className="inline mr-2" />
+          Products List
+        </NavLink>
         {/* Logout */}
         <button
           onClick={handleLogout}

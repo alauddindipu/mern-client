@@ -4,31 +4,22 @@ import { Link, useLoaderData } from "react-router-dom";
 const BuySummary = () => {
     const loadedBuyerInfo = useLoaderData();
     console.log(loadedBuyerInfo);
-    
+
     return (
         <div className="mt-14">
             <div className="flex justify-center justify-items-center">
                 <h1 className="text-3xl font-bold text-center mb-10">
-                    All Categories: {loadedBuyerInfo.length}
+                    Buying Summary of {loadedBuyerInfo.length} Items
                 </h1>
-                &nbsp;&nbsp;&nbsp;
-                <Link to="/dashboard/category">
-                    <button
-                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white 
-          py-2 px-4 border border-blue-500 hover:border-transparent rounded-tl-md rounded-br-md"
-                    >
-                        Add Category
-                    </button>
-                </Link>
             </div>
             <table className="border-collapse w-2/3 mx-auto">
                 <thead>
                     <tr>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                        Product Name
+                            Product Name
                         </th>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                        Product Price($)
+                            Product Price($)
                         </th>
                     </tr>
                 </thead>

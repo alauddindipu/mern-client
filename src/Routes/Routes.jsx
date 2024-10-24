@@ -34,22 +34,16 @@ const routes = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>
-      }
-      , {
+      },
+      {
         path: "/totalProducts",
         element: <Course></Course>
-      }
-      // , {
-      //   path: "/products",
-      //   element: (<PrivateRoute>
-      //     <Course></Course>
-      //   </PrivateRoute>)
-      // }
-
-      ,
+      },
       {
         path: "/productDetails/:id",
-        element: <ProductDetails></ProductDetails>,
+        element: (<PrivateRoute>
+          <ProductDetails></ProductDetails>
+        </PrivateRoute>),
         loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
       },
       {// should be in child as router dahboard +++++++++++++++++++++++++
