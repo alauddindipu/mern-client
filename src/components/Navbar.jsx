@@ -7,7 +7,7 @@ import { IoMdLogIn } from "react-icons/io";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
 
   return (
     <>

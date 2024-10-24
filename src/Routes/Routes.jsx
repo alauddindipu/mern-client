@@ -5,7 +5,6 @@ import PrivateRoute from "./PrivateRoute";
 import CourseDetails from "../Pages/CourseDetails";
 import Course from "../Pages/Course";
 import ErrorShow from "../Pages/Shared/ErrorShow/ErrorShow";
-import CategoryDetails from "../Pages/CategoryDetails";
 import RegisterPage from "../Pages/RegisterPage";
 import LoginPage from "../Pages/LoginPage";
 import Profile from "../Pages/dashboardPages/Profile";
@@ -16,6 +15,8 @@ import AllCategories from "../Pages/dashboardPages/AllCategories";
 import AddProductUsingReactState from "../Pages/dashboardPages/AddProductUsingReactState";
 import TotalProducts from "../Pages/dashboardPages/TotalProducts.jsx";
 import Edit from "../Pages/dashboardPages/Edit.jsx";
+import CategoryWiseDetails from "../Pages/CategoryWiseDetails.jsx";
+import ProductDetails from "../Pages/ProductDetails.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -35,8 +36,8 @@ const routes = createBrowserRouter([
         element: <RegisterPage></RegisterPage>
       }
       , {
-        path: "/products",
-        element:<Course></Course>
+        path: "/course",
+        element: <Course></Course>
       }
       // , {
       //   path: "/products",
@@ -44,23 +45,24 @@ const routes = createBrowserRouter([
       //     <Course></Course>
       //   </PrivateRoute>)
       // }
-     
+
       , {
         path: "/products/:id",
-        element:<CourseDetails></CourseDetails>, 
-        // (<PrivateRoute>
-        //   <CourseDetails></CourseDetails>
-        // </PrivateRoute>),
+        element: <CourseDetails></CourseDetails>,
         loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`)
-      }, 
+      },
       {
-        path: "/bookcategories/:category",
-        element: <CategoryDetails></CategoryDetails>,
-        // (<PrivateRoute>
-        //   <CategoryDetails></CategoryDetails>
-        // </PrivateRoute>),
-        loader: ({ params }) => fetch(`http://localhost:5000/bookcategories/${params.category}`)
-      }, {
+        path: "/productDetails/:id",
+        element: <ProductDetails></ProductDetails>,
+        loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+      },
+
+      {
+        path: "/bookCategoryWiseDetails/:category",
+        element: <CategoryWiseDetails></CategoryWiseDetails>,
+        loader: ({ params }) => fetch(`http://localhost:5000/bookCategoryWiseDetails/${params.category}`)
+      },
+      {
         path: "edit/:id",
         element: <Edit></Edit>,
         loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`),
